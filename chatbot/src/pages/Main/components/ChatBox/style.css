@@ -1,0 +1,8 @@
+input#userMessage {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border-color: grey;
+    outline-color: pink;
+    width: 100%;
+    height: 45px;
+}
