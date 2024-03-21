@@ -11,16 +11,16 @@ export const Main = () => {
         <Box padding={12} margin='auto'>
             <Container>
                 <Heading align='center' accessibilityLevel={1} size='600'>
-                    Hi!
+                   👋 Hi stranger!
                 </Heading>
                 <Heading align='center' accessibilityLevel={3} size='500'>
-                    This is your new favourite chatbot
+                    This is your new favourite chatbot.
                 </Heading>
                 <ChatBox/>
             </Container>
             <footer>
                 <hr />
-                Made with <Icon icon='heart' accessibilityLabel="Heart icon" inline/> by Vicky Suarez
+                Made with <Icon icon='heart' accessibilityLabel="Heart icon" inline color='brandPrimary' /> by Vicky Suarez
             </footer>
         </Box>
     )

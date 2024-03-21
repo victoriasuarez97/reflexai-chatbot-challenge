@@ -1,3 +1,15 @@
+#chatContainer {
+    height: 70vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    margin-top: auto;
+    height: 40px;
+}
+
 input#userMessage {
     padding: 8px 16px;
     border-radius: 8px;
