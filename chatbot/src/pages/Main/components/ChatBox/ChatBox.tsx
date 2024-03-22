@@ -48,6 +48,7 @@ export const ChatBox = () => {
             </Flex>
             <form onSubmit={handleSubmit}>
                 <Flex alignItems="center" wrap={false} width='100%'>
+                    <label htmlFor="userMessage" />
                     <input
                         id='userMessage'
                         onChange={handleInputChange}
