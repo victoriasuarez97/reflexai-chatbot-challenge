@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@vercel/postgres": "^0.7.2",
     "ai": "^3.0.13",
     "gestalt": "^146.5.1",
     "next": "14.1.3",

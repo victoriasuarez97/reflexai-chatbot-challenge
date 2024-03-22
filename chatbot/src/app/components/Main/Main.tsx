@@ -1,7 +1,7 @@
 'use client'
 
 import { Box, Container, Heading, Icon } from "gestalt"
-import { ChatBox } from "./components/ChatBox/ChatBox";
+import { ChatBox } from "../ChatBox/ChatBox";
 
 import 'gestalt/dist/gestalt.css';
 import './style.css'
