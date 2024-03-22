@@ -1,13 +1,13 @@
-import OpenAI from 'openai';
-import { OpenAIStream, StreamingTextResponse } from 'ai';
-import { NextResponse } from 'next/server';
-import { sql } from '@vercel/postgres';
+import OpenAI from 'openai'
+import { OpenAIStream, StreamingTextResponse } from 'ai'
+import { NextResponse } from 'next/server'
+import { sql } from '@vercel/postgres'
  
 const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_API_KEY,
-});
+})
  
-export const runtime = 'edge';
+export const runtime = 'edge'
  
 export async function POST(req: Request) {
   try {
@@ -43,9 +43,14 @@ export async function POST(req: Request) {
  
 export async function GET(request: Request) {
   try {
-    const result = await sql`CREATE TABLE Chatbot ( User varchar(255), Message varchar(255) );`;
-    return NextResponse.json({ result }, { status: 200 });
+    const result = await sql`CREATE TABLE catbot (
+      id UUID,
+      userName VARCHAR,
+      message VARCHAR
+  )`
+
+    return NextResponse.json({ result }, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json({ error }, { status: 500 })
   }
 }
