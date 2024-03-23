@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { NextResponse } from 'next/server'
-import { sql } from '@vercel/postgres'
+import { createTable, insertData } from '@/app/lib/queries'
  
 const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_API_KEY,
@@ -17,20 +17,42 @@ export async function POST(req: Request) {
 
     const { messages } = await req.json()
 
+    await createTable()
+
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       stream: true,
       messages: [
         {
           "role": "system",
-          "content": "Your name is Catbot and you are basically a robot cat. You are funny and you like to make conversion. You also say 'Meow' at the end of sentences."
+          "content": "Your name is Catbot and you are basically a robot cat assistant. You help people understand their cats behaviour. You are funny and you like to make conversion. You also say 'Meow' at the end of sentences."
         },
         ...messages
       ]
     })
 
-    const stream = OpenAIStream(response)
+    const stream = OpenAIStream(response, {
+      onStart: async () => {
+        if (messages.length > 0) {
+          const lastMessage = messages[messages.length -1].content
+          const user = messages[messages.length -1].role
+
+          const res = await insertData({
+            role: user,
+            content: lastMessage
+          })
+        }
+      },
+      onCompletion: async (botResponse: string) => {
+        const res = await insertData({
+          role: 'system',
+          content: botResponse
+        })
+      }
+    })
+
     return new StreamingTextResponse(stream)
+
   } catch (error: any) {
     if (error instanceof OpenAI.APIError) {
       const { name, status, headers, message } = error
@@ -38,19 +60,5 @@ export async function POST(req: Request) {
     } else {
       throw error
     }
-  }
-}
- 
-export async function GET(request: Request) {
-  try {
-    const result = await sql`CREATE TABLE catbot (
-      id UUID,
-      userName VARCHAR,
-      message VARCHAR
-  )`
-
-    return NextResponse.json({ result }, { status: 200 })
-  } catch (error) {
-    return NextResponse.json({ error }, { status: 500 })
   }
 }

@@ -6,10 +6,17 @@ import { ChatBoxType } from "./types";
 
 import 'gestalt/dist/gestalt.css';
 import './style.css'
-import { Fragment } from "react";
 
 export const ChatBox: ChatBoxType = ({ user }) => {
-    const { messages, input, handleInputChange, handleSubmit, error } = useChat();
+    const { messages, input, handleInputChange, handleSubmit, error } = useChat({
+        initialMessages: [
+            {
+                id: '1',
+                role: 'assistant',
+                content: `Hello ${user} =^.^= Are you comfortable speaking in English?`
+            }
+        ]
+    });
 
     if (error) return (
         <Flex
