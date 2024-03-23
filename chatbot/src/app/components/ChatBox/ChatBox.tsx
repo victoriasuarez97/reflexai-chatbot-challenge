@@ -2,11 +2,13 @@
 
 import { Avatar, Box, Flex, IconButton, Text, Toast } from "gestalt"
 import { useChat } from 'ai/react';
+import { ChatBoxType } from "./types";
 
 import 'gestalt/dist/gestalt.css';
 import './style.css'
+import { Fragment } from "react";
 
-export const ChatBox = () => {
+export const ChatBox: ChatBoxType = ({ user }) => {
     const { messages, input, handleInputChange, handleSubmit, error } = useChat();
 
     if (error) return (
@@ -25,41 +27,44 @@ export const ChatBox = () => {
     )
 
     return (
-        <Box borderStyle="sm" rounding={3} padding={6} margin={6} id='chatContainer'>
-            <Flex direction="column">
-                {
-                    messages.map(({ id, role, content }) => (
-                        <Box key={id} marginTop={4} marginBottom={4}>
-                            <Flex alignItems="center" wrap={false} width='100%'>
-                                <Box>
-                                    {role === 'user'
-                                        ? <Avatar name='User' size='md' />
-                                        : <Avatar src='/robot.png' name='Catbot' verified size='md' />
-                                    }
-                                </Box>
-                                <Box marginStart={3}>
-                                    <Text weight='bold'>{role === 'user' ? 'User' : 'Catbot'}</Text>
-                                    <Text>{content}</Text>
-                                </Box>
-                            </Flex>
-                        </Box>
-                    ))
-                }
-            </Flex>
-            <form onSubmit={handleSubmit}>
-                <Flex alignItems="center" wrap={false} width='100%'>
-                    <label htmlFor="userMessage" />
-                    <input
-                        id='userMessage'
-                        onChange={handleInputChange}
-                        value={input}
-                        placeholder="Ask me anything"
-                        autoComplete="off"
-                    />
-                    <IconButton icon="send" accessibilityLabel="Send message" type="submit" />
+        <Box id='container'>
+            <Text>{`Okay ${user}, now you are in a chat room with your cat.`}</Text>
+            <Text>Let's see how this goes. <Text inline weight="bold">Have fun!</Text></Text>
+            <Box borderStyle="sm" rounding={3} padding={6} margin={6} id='chatContainer'>
+                <Flex direction="column">
+                    {
+                        messages.map(({ id, role, content }) => (
+                            <Box key={id} marginTop={4} marginBottom={4}>
+                                <Flex alignItems="center" wrap={false} width='100%'>
+                                    <Box>
+                                        {role === 'user'
+                                            ? <Avatar name={`${user}`} size='md' />
+                                            : <Avatar src='/robot.png' name='Catbot' verified size='md' />
+                                        }
+                                    </Box>
+                                    <Box marginStart={3}>
+                                        <Text weight='bold'>{role === 'user' ? user : 'Catbot'}</Text>
+                                        <Text>{content}</Text>
+                                    </Box>
+                                </Flex>
+                            </Box>
+                        ))
+                    }
                 </Flex>
-                <Text size='100'>Please don&apos;t forget to be polite always</Text>
-            </form>
+                <form onSubmit={handleSubmit}>
+                    <Flex alignItems="center" wrap={false} width='100%'>
+                        <label htmlFor="userMessage" />
+                        <input
+                            id='userMessage'
+                            onChange={handleInputChange}
+                            value={input}
+                            placeholder="Ask me anything"
+                            autoComplete="off"
+                        />
+                        <IconButton icon="send" accessibilityLabel="Send message" type="submit" />
+                    </Flex>
+                </form>
+            </Box>
         </Box>
     )
 }

@@ -1,27 +1,31 @@
 'use client'
 
-import { Box, Container, Heading, Icon } from "gestalt"
+import { useState } from "react";
+import { Box, Flex, Icon } from "gestalt"
+import { Welcome } from "../Welcome/Welcome";
 import { ChatBox } from "../ChatBox/ChatBox";
 
 import 'gestalt/dist/gestalt.css';
-import './style.css'
 
 export const Main = () => {
+    const [form, setForm] = useState(false)
+    const [user, setUser] = useState('')
+
     return (
-        <Box padding={12} margin='auto'>
-            <Container>
-                <Heading align='center' accessibilityLevel={1} size='600'>
-                   👋 Hi stranger!
-                </Heading>
-                <Heading align='center' accessibilityLevel={3} size='500'>
-                    This is your new favourite chatbot.
-                </Heading>
-                <ChatBox/>
-            </Container>
+        <Flex
+            alignItems="center"
+            height="100%"
+            justifyContent="center"
+            width="100%"
+            direction="column"
+            minHeight='95vh'
+        >
+            <Box id='main' alignContent="center">
+                {form ? <ChatBox {... { user }}/> : <Welcome {... { user, setUser, form, setForm }} />}
+            </Box>
             <footer>
-                <hr />
                 Made with <Icon icon='heart' accessibilityLabel="Heart icon" inline color='brandPrimary' /> by Vicky Suarez
             </footer>
-        </Box>
+        </Flex>
     )
 }
