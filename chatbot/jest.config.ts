@@ -11,7 +11,16 @@ const esModules = ["lodash-es", "nanoid"].join("|");
 // Add any custom config to be passed to Jest
 const config: Config = {
   moduleDirectories: ["node_modules", "<rootDir>/"],
+  clearMocks: true,
   coverageProvider: 'v8',
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: -10,
+    }
+  },
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   transform: {

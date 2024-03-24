@@ -34,42 +34,40 @@ export const ChatBox: ChatBoxType = ({ user }) => {
     )
 
     return (
-        <Box id='container'>
-            <Box borderStyle="sm" rounding={3} padding={6} margin={6} id='chatContainer'>
-                <Flex direction="column">
-                    {
-                        messages.map(({ id, role, content }) => (
-                            <Box key={id} marginTop={4} marginBottom={4}>
-                                <Flex alignItems="center" wrap={false} width='100%'>
-                                    <Box>
-                                        {role === 'user'
-                                            ? <Avatar name={`${user}`} size='md' />
-                                            : <Avatar src='/robot.png' name='Catbot' verified size='md' />
-                                        }
-                                    </Box>
-                                    <Box marginStart={3}>
-                                        <Text weight='bold'>{role === 'user' ? user : 'Catbot'}</Text>
-                                        <Text>{content}</Text>
-                                    </Box>
-                                </Flex>
-                            </Box>
-                        ))
-                    }
+        <Box borderStyle="sm" rounding={3} padding={6} margin={6} id='chatContainer'>
+            <Flex direction="column">
+                {
+                    messages.map(({ id, role, content }) => (
+                        <Box key={id} marginTop={4} marginBottom={4}>
+                            <Flex alignItems="center" wrap={false} width='100%'>
+                                <Box>
+                                    {role === 'user'
+                                        ? <Avatar name={user} size='md' />
+                                        : <Avatar src='/robot.png' name='Catbot' verified size='md' />
+                                    }
+                                </Box>
+                                <Box marginStart={3}>
+                                    <Text weight='bold'>{role === 'user' ? user : 'Catbot'}</Text>
+                                    <Text>{content}</Text>
+                                </Box>
+                            </Flex>
+                        </Box>
+                    ))
+                }
+            </Flex>
+            <form onSubmit={handleSubmit}>
+                <Flex alignItems="center" wrap={false} width='100%'>
+                    <label htmlFor="userMessage" />
+                    <input
+                        id='userMessage'
+                        onChange={handleInputChange}
+                        value={input}
+                        placeholder="Ask me anything"
+                        autoComplete="off"
+                    />
+                    <IconButton icon="send" accessibilityLabel="Send message" type="submit" />
                 </Flex>
-                <form onSubmit={handleSubmit}>
-                    <Flex alignItems="center" wrap={false} width='100%'>
-                        <label htmlFor="userMessage" />
-                        <input
-                            id='userMessage'
-                            onChange={handleInputChange}
-                            value={input}
-                            placeholder="Ask me anything"
-                            autoComplete="off"
-                        />
-                        <IconButton icon="send" accessibilityLabel="Send message" type="submit" />
-                    </Flex>
-                </form>
-            </Box>
+            </form>
         </Box>
     )
 }

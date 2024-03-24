@@ -25,11 +25,7 @@
 }
 
 #container {
-  animation: fadeIn 0.2s;
-}
-
-#container {
-  animation: fadeIn 5s;
+  animation: fadeIn 0.7s;
 }
 
 input {
