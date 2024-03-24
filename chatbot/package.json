@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^7.3.1",
     "@vercel/postgres": "^0.7.2",
     "ai": "^3.0.13",
     "gestalt": "^146.5.1",
