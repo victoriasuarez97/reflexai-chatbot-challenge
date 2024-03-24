@@ -2,14 +2,15 @@ import { Box, Heading, Text, TextField } from "gestalt"
 import { WelcomeType } from "./types"
 
 import './style.css'
+import { FormEvent, SyntheticEvent } from "react"
 
 export const Welcome: WelcomeType = ({ user, setUser, setForm }) => {
 
-    const handleUser = (e) => {
+    const handleUser = (e: { value: string } & { readonly event: SyntheticEvent<HTMLInputElement, Event> }) => {
         setUser(e.value)
     }
 
-    const handleForm = (e) => {
+    const handleForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setForm(true)
     }
@@ -17,13 +18,13 @@ export const Welcome: WelcomeType = ({ user, setUser, setForm }) => {
     return (
         <Box margin={12} id='container'>
             <Heading accessibilityLevel={1} size='600'>
-                👋 Hello there!
+                P.O.V. you've just created a cat robot powered with AI to understand better your cat's behaviour.
             </Heading>
-            <Heading accessibilityLevel={2} size='500' id='subtitle'>
-                P.O.V. you've just created a cat assistant to communicate with your cat.
+            <Heading accessibilityLevel={2} size='400' id='subtitle'>
+                👋 Hello there! Welcome to <Text weight="bold" inline size='400'>Catbot</Text>
             </Heading>
-            <Heading accessibilityLevel={3} size='300' id='secondSubtitle'>
-                Please, introduce yourself so you can live the experience.
+            <Heading accessibilityLevel={3} size='200' id='secondSubtitle'>
+                Please, introduce yourself with a name to start.
             </Heading>
             <form onSubmit={(e) => handleForm(e)}>
                 <TextField

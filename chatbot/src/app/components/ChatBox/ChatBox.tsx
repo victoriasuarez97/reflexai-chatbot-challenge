@@ -1,6 +1,6 @@
 'use client'
 
-import { Avatar, Box, Flex, IconButton, Text, Toast } from "gestalt"
+import { Avatar, Box, Flex, IconButton, Text, TextField, Toast } from "gestalt"
 import { useChat } from 'ai/react';
 import { ChatBoxType } from "./types";
 
@@ -13,9 +13,9 @@ export const ChatBox: ChatBoxType = ({ user }) => {
             {
                 id: '1',
                 role: 'assistant',
-                content: `Hello ${user} =^.^= Are you comfortable speaking in English?`
+                content: `Hello ${user} =^.^= I'm your catssistant!`
             }
-        ]
+        ],
     });
 
     if (error) return (
@@ -28,15 +28,13 @@ export const ChatBox: ChatBoxType = ({ user }) => {
             <Toast
                 type="error"
                 text="Something went wrong. Please try again later."
-                dismissButton={{ onDismiss: () => {}}}
+                dismissButton={{ onDismiss: () => window.location.reload() }}
             />
         </Flex>
     )
 
     return (
         <Box id='container'>
-            <Text>{`Okay ${user}, now you are in a chat room with your cat.`}</Text>
-            <Text>Let's see how this goes. <Text inline weight="bold">Have fun!</Text></Text>
             <Box borderStyle="sm" rounding={3} padding={6} margin={6} id='chatContainer'>
                 <Flex direction="column">
                     {

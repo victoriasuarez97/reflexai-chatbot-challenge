@@ -35,10 +35,10 @@ export async function POST(req: Request) {
       onStart: async () => {
         if (messages.length > 0) {
           const lastMessage = messages[messages.length -1].content
-          const user = messages[messages.length -1].role
+          const role = messages[messages.length -1].role
 
           const res = await insertData({
-            role: user,
+            role,
             content: lastMessage
           })
         }
