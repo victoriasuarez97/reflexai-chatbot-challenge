@@ -53,7 +53,7 @@ export async function POST(req: Request) {
 
     return new StreamingTextResponse(stream)
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof OpenAI.APIError) {
       const { name, status, headers, message } = error
       return NextResponse.json({ name, status, headers, message }, { status })
