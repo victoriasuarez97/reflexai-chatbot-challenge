@@ -37,14 +37,14 @@ export async function POST(req: Request) {
           const lastMessage = messages[messages.length -1].content
           const role = messages[messages.length -1].role
 
-          const res = await insertData({
+          await insertData({
             role,
             content: lastMessage
           })
         }
       },
       onCompletion: async (botResponse: string) => {
-        const res = await insertData({
+        await insertData({
           role: 'system',
           content: botResponse
         })

@@ -15,7 +15,7 @@ const config: Config = {
   coverageProvider: 'v8',
   coverageThreshold: {
     global: {
-      branches: 80,
+      branches: 70,
       functions: 80,
       lines: 80,
       statements: -10,

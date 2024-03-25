@@ -1,4 +1,4 @@
-import { ChangeEventHandler, Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from "react"
 
 type Props = {
     user: string
