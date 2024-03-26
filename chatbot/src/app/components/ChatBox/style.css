@@ -1,13 +1,17 @@
-#chatContainer {
+#wrapper {
     height: 70vh;
     width: 50vw;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     animation: fadeIn 0.2s;
 }
 
+#chatContainer {
+    overflow-y: auto;
+}
+
 form {
+    padding: 5px 0px;
     margin-top: auto;
     height: 40px;
 }

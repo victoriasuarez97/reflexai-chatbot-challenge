@@ -4,10 +4,11 @@ exports[`ChatBox test should match snapshot when there is a start and completion
 <div>
   <div
     class="LJB PKX Pw5 QDA Tte daS dxm fBv fte s2n zI7 iyn Hsu"
-    id="chatContainer"
+    id="wrapper"
   >
     <div
-      class="jzS un8 C9i TB_"
+      class="zI7 iyn Hsu"
+      id="chatContainer"
     >
       <div
         class="KO4 RDc zI7 iyn Hsu"

@@ -8,6 +8,7 @@ const spyHook = { useChat }
 const useChatSpy = jest.spyOn(spyHook, 'useChat')
 const mockHandleSubmit = jest.fn()
 const mockHandleInputChange = jest.fn()
+Element.prototype.scrollTo = jest.fn();
 
 describe('ChatBox test', () => {
     it('should initial message from bot', () => {

@@ -1,6 +1,7 @@
 'use client'
 
-import { Avatar, Box, Flex, IconButton, Text, TextField, Toast } from "gestalt"
+import { LegacyRef, useEffect, useRef } from "react";
+import { Avatar, Box, Flex, IconButton, Text, Toast } from "gestalt"
 import { useChat } from 'ai/react';
 import { ChatBoxType } from "./types";
 
@@ -8,6 +9,8 @@ import 'gestalt/dist/gestalt.css';
 import './style.css'
 
 export const ChatBox: ChatBoxType = ({ user }) => {
+    const ref = useRef<HTMLDivElement | null | undefined>()
+
     const { messages, input, handleInputChange, handleSubmit, error } = useChat({
         initialMessages: [
             {
@@ -16,9 +19,20 @@ export const ChatBox: ChatBoxType = ({ user }) => {
                 content: `Hello ${user} =^.^= I'm your catssistant!`
             }
         ],
-    });
+    })
 
-    if (error) return (
+    const scrollToBottom = () => {
+        const { offsetHeight, scrollHeight, scrollTop } = ref.current as HTMLDivElement
+        if (scrollHeight <= scrollTop + offsetHeight + 200) {
+            ref.current?.scrollTo(0, scrollHeight)
+        }
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [messages])
+
+    if (error) return (   
         <Flex
             justifyContent="center"
             alignItems="center"
@@ -34,8 +48,8 @@ export const ChatBox: ChatBoxType = ({ user }) => {
     )
 
     return (
-        <Box borderStyle="sm" rounding={3} padding={6} margin={6} id='chatContainer'>
-            <Flex direction="column">
+        <Box borderStyle="sm" rounding={3} padding={6} margin={6} id='wrapper'>
+            <Box ref={ref as LegacyRef<HTMLDivElement>} id='chatContainer'>
                 {
                     messages.map(({ id, role, content }) => (
                         <Box key={id} marginTop={4} marginBottom={4}>
@@ -54,7 +68,7 @@ export const ChatBox: ChatBoxType = ({ user }) => {
                         </Box>
                     ))
                 }
-            </Flex>
+            </Box>
             <form onSubmit={handleSubmit}>
                 <Flex alignItems="center" wrap={false} width='100%'>
                     <label htmlFor="userMessage" />
